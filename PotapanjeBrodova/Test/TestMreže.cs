@@ -9,6 +9,7 @@ namespace Test
         [TestMethod]
         public void TestMethod1()
         {
+            int a = 3;
         }
     }
 }
