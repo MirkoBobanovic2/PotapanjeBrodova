@@ -45,6 +45,16 @@ namespace PotapanjeBrodova
         {
             polja[p.Redak, p.Stupac] = null;
         }
+        public IEnumerable<IEnumerable<Polje>> DajNizoveSlobodnihPolja(int duljinaNiza)
+        {
+            List<IEnumerable<Polje>> nizovi = new List<IEnumerable<Polje>>();
+            foreach(IEnumerable<Polje> niz in DajSlobodnaPolja())
+            {
+                if(niz.Count() == duljinaNiza)
+
+            }
+            throw new NotImplementedException();
+        }
 
         private Polje[,] polja;
         private int redaka;
