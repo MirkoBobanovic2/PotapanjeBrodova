@@ -1,50 +1,43 @@
-﻿using System;
+﻿using PotapanjeBrodova;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace PotapanjeBrodova
 {
-    public class KružniPucač : IPucač
+    public class KružniPucač : Pucač, Ipucač
     {
-        public KružniPucač(Mreža mreža,  Polje Pogođeno, int duljinaBroda)
+        public KružniPucač(Mreža mreža, Polje pogođeno, int duljinaBroda)
+            : base(mreža, pogođeno, duljinaBroda)
         {
-            this.mreža = mreža;
-            this.prvoPogođenoPolje = Pogođeno;
-            this.duljinaBroda = duljinaBroda;
+            nizoviPoljaUNastavku = DajNizovePoljaUNastavcima();
+        }
 
-        }
-        public IEnumerable<Polje> PogođenaPolja
+        public override Polje Gađaj()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            int indeks = izbornik.Next(nizoviPoljaUNastavku.Count);
+            gađanoPolje = nizoviPoljaUNastavku[indeks].First();
+            // uklanjamo odabrani smjer za eventualno sljedeće gađanje
+            nizoviPoljaUNastavku.RemoveAt(indeks);
+            return gađanoPolje;
         }
-        private IEnumerable<Polje> DajKandidate()
+
+        private List<IEnumerable<Polje>> DajNizovePoljaUNastavcima()
         {
-            List<Polje> kandidati = new List<Polje>();
-            foreach(Smjer smjer in Enum.GetValues(typeof(Smjer)))
+            Debug.Assert(PogođenaPolja.Count() == 1);
+            List<IEnumerable<Polje>> kandidati = new List<IEnumerable<Polje>>();
+            foreach (Smjer smjer in Enum.GetValues(typeof(Smjer)))
             {
-                var lista = mreža.DajNizSlobodnihPolja(prvoPogođenoPolje, smjer);
+                var niz = mreža.DajNizSlobodnihPolja(PogođenaPolja.ElementAt(0), smjer);
+                if (niz.Count() > 0)
+                    kandidati.Add(niz);
             }
+            Debug.Assert(kandidati.Count() > 0);
             return kandidati;
         }
 
-
-        private Mreža mreža;
-            private Polje prvoPogođenoPolje;
-        private int duljinaBroda;
-
-        public Polje Gađaj()
-        {
-
-            throw new NotImplementedException();
-        }
-
-        public void ObradiGađanje(RezultatGađanja rezultat)
-        {
-            throw new NotImplementedException();
-        }
+        private List<IEnumerable<Polje>> nizoviPoljaUNastavku;
     }
 }

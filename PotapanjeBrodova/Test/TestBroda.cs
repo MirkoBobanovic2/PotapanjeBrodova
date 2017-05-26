@@ -23,16 +23,14 @@ namespace Test
             Brod brod = new Brod(new Polje[] { new Polje(1, 1), new Polje(1, 2) });
             RezultatGađanja rez = brod.Gađaj(new Polje(0, 0));
             Assert.AreEqual(RezultatGađanja.Promašaj, rez);
-           
         }
 
         [TestMethod]
         public void Brod_GađajVraćaPogodakZaPrvoPogođenoPolje()
         {
-            Brod brod = new Brod(new Polje[] { new Polje(1, 1), new Polje(1, 2), new Polje(1,3) });
+            Brod brod = new Brod(new Polje[] { new Polje(1, 1), new Polje(1, 2), new Polje(1, 3) });
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 2));
             Assert.AreEqual(RezultatGađanja.Pogodak, rez);
-
         }
 
         [TestMethod]
@@ -42,7 +40,6 @@ namespace Test
             brod.Gađaj(new Polje(1, 2));
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 1));
             Assert.AreEqual(RezultatGađanja.Pogodak, rez);
-           
         }
 
         [TestMethod]
@@ -53,7 +50,6 @@ namespace Test
             brod.Gađaj(new Polje(1, 3));
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 1));
             Assert.AreEqual(RezultatGađanja.Potopljen, rez);
-
         }
 
         [TestMethod]
@@ -61,10 +57,8 @@ namespace Test
         {
             Brod brod = new Brod(new Polje[] { new Polje(1, 1), new Polje(1, 2), new Polje(1, 3) });
             brod.Gađaj(new Polje(1, 2));
-         
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 2));
             Assert.AreEqual(RezultatGađanja.Pogodak, rez);
-
         }
 
         [TestMethod]
@@ -76,7 +70,6 @@ namespace Test
             brod.Gađaj(new Polje(1, 1));
             RezultatGađanja rez = brod.Gađaj(new Polje(1, 1));
             Assert.AreEqual(RezultatGađanja.Potopljen, rez);
-
         }
     }
 }

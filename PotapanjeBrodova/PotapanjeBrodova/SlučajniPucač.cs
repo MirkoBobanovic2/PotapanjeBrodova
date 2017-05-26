@@ -1,36 +1,30 @@
-﻿using System;
+﻿using PotapanjeBrodova;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace PotapanjeBrodova
 {
-    public class SlučajniPucač : IPucač
+    public class SlučajniPucač : Pucač, Ipucač
     {
-
-        public IEnumerable<Polje> PogođenaPolja
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
         public SlučajniPucač(Mreža mreža, int duljinaBroda)
+            : base(mreža, duljinaBroda)
         {
-            this.mreža = mreža;
-            this.duljinaBroda = duljinaBroda;
-        }
-        public Polje Gađaj()
-        {   
-            throw new NotImplementedException();
         }
 
-        public void ObradiGađanje(RezultatGađanja rezultat)
+        public override Polje Gađaj()
         {
-            throw new NotImplementedException();
+            var kandidati = DajKandidate();
+            Debug.Assert(kandidati.Count > 0);
+            gađanoPolje = kandidati[izbornik.Next(kandidati.Count)];
+            return gađanoPolje;
         }
 
-        public Mreža mreža;
-        public int duljinaBroda;
+        protected virtual List<Polje> DajKandidate()
+        {
+            return mreža.DajNizoveSlobodnihPolja(duljinaBroda).SelectMany(niz => niz).ToList();
+        }
     }
 }

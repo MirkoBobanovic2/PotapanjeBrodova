@@ -16,9 +16,9 @@ namespace PotapanjeBrodova
         {
             foreach (Brod brod in brodovi)
             {
-                var Rezultat = brod.Gađaj(polje);
-                if (Rezultat != RezultatGađanja.Promašaj)
-                    return Rezultat;
+                var rezultat = brod.Gađaj(polje);
+                if (rezultat != RezultatGađanja.Promašaj)
+                    return rezultat;
             }
             return RezultatGađanja.Promašaj;
         }
@@ -26,6 +26,11 @@ namespace PotapanjeBrodova
         public int BrojBrodova
         {
             get { return brodovi.Count; }
+        }
+
+        public IEnumerable<Brod> Brodovi
+        {
+            get { return brodovi; }
         }
 
         private List<Brod> brodovi = new List<Brod>();

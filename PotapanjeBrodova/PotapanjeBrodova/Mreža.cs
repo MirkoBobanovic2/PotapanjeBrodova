@@ -6,13 +6,14 @@ using System.Text;
 
 namespace PotapanjeBrodova
 {
-   public  enum Smjer
+    public enum Smjer
     {
         Desno,
         Dolje,
         Lijevo,
         Gore
     }
+
     public class Mreža
     {
         public Mreža(int redaka, int stupaca)
@@ -41,7 +42,12 @@ namespace PotapanjeBrodova
             return p;
         }
 
-       public  IEnumerable<Polje> DajNizSlobodnihPolja(Polje polje, Smjer smjer)
+        public void UkloniPolje(int redak, int stupac)
+        {
+            polja[redak, stupac] = null;
+        }
+
+        public IEnumerable<Polje> DajNizSlobodnihPolja(Polje polje, Smjer smjer)
         {
             switch (smjer)
             {
@@ -58,12 +64,12 @@ namespace PotapanjeBrodova
                     break;
             }
             return new List<Polje>();
-            
         }
+
         private IEnumerable<Polje> DajSlobodnaPoljaDesno(Polje polje)
         {
             List<Polje> rezultat = new List<Polje>();
-            for (int s=polje.Stupac+1; s<Stupaca; ++s)
+            for (int s = polje.Stupac + 1; s < Stupaca; ++s)
             {
                 if (polja[polje.Redak, s] == null)
                     break;
@@ -75,7 +81,7 @@ namespace PotapanjeBrodova
         private IEnumerable<Polje> DajSlobodnaPoljaDolje(Polje polje)
         {
             List<Polje> rezultat = new List<Polje>();
-            for (int r = polje.Redak + 1; r < Stupaca; ++r)
+            for (int r = polje.Redak + 1; r < Redaka; ++r)
             {
                 if (polja[r, polje.Stupac] == null)
                     break;
@@ -87,7 +93,7 @@ namespace PotapanjeBrodova
         private IEnumerable<Polje> DajSlobodnaPoljaLijevo(Polje polje)
         {
             List<Polje> rezultat = new List<Polje>();
-            for (int s = polje.Stupac - 1; s >=0; --s)
+            for (int s = polje.Stupac - 1; s >= 0; --s)
             {
                 if (polja[polje.Redak, s] == null)
                     break;
@@ -106,11 +112,6 @@ namespace PotapanjeBrodova
                 rezultat.Add(polja[r, polje.Stupac]);
             }
             return rezultat;
-        }
-
-        public void UkloniPolje(int redak, int stupac)
-        {
-            polja[redak, stupac] = null;
         }
 
         public void UkloniPolje(Polje p)

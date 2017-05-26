@@ -5,12 +5,10 @@ using System.Text;
 
 namespace PotapanjeBrodova
 {
-    public interface IPucač
+    public interface Ipucač
     {
         Polje Gađaj();
         void ObradiGađanje(RezultatGađanja rezultat);
         IEnumerable<Polje> PogođenaPolja { get; }
-
-       
     }
 }
