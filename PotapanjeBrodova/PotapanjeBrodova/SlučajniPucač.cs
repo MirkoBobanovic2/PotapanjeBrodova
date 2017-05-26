@@ -30,7 +30,7 @@ namespace PotapanjeBrodova
             throw new NotImplementedException();
         }
 
-        private Mreža mreža;
-        private int duljinaBroda;
+        public Mreža mreža;
+        public int duljinaBroda;
     }
 }
